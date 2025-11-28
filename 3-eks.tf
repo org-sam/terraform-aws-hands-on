@@ -43,7 +43,7 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    initial = {
+    eks-node-initial = {
       instance_types = ["t3.medium", "t3a.medium"]
 
       min_size     = 1
