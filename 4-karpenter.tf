@@ -10,7 +10,7 @@ module "karpenter" {
   namespace = "karpenter"
 
   create_node_iam_role = false
-  node_iam_role_arn    = module.eks.eks_managed_node_groups["initial"].iam_role_arn
+  node_iam_role_arn    = module.eks.eks_managed_node_groups["eks-node-initial"].iam_role_arn
   create_access_entry  = false
 
 }

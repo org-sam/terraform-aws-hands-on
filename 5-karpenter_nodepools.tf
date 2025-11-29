@@ -57,7 +57,7 @@ resource "kubectl_manifest" "karpenter_ec2nodeclass_default" {
     metadata:
       name: ${local.env}-${local.name}-default
     spec:
-      role: ${module.eks.eks_managed_node_groups["initial"].iam_role_name}
+      role: ${module.eks.eks_managed_node_groups["eks-node-initial"].iam_role_name}
       amiSelectorTerms:
         - alias: al2023@latest
       blockDeviceMappings:
