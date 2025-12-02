@@ -69,12 +69,18 @@ module "eks" {
     resources = ["secrets"]
   }
 
-  tags = {
-    Environment              = var.env
-    Terraform                = "true"
-    "karpenter.sh/discovery" = "${var.env}-${var.name}"
-  }
-  security_group_tags = {
-    "karpenter.sh/discovery" = "${var.env}-${var.name}"
-  }
+  tags = merge(
+    {
+      Environment              = var.env
+      Terraform                = "true"
+      "karpenter.sh/discovery" = "${var.env}-${var.name}"
+    },
+    var.tags
+  )
+  security_group_tags = merge(
+    {
+      "karpenter.sh/discovery" = "${var.env}-${var.name}"
+    },
+    var.tags
+  )
 }

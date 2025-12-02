@@ -40,3 +40,9 @@ variable "disk_size" {
   type        = number
   default     = 30
 }
+
+variable "tags" {
+  description = "Additional tags for all resources"
+  type        = map(string)
+  default     = {}
+}

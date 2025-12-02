@@ -26,11 +26,6 @@ variable "zone2" {
 variable "eks_version" {
   description = "Kubernetes version"
   type        = string
-
-  validation {
-    condition     = can(regex("^1\\.(2[89]|3[0-9])$", var.eks_version))
-    error_message = "EKS version must be between 1.28 and 1.39."
-  }
 }
 
 variable "vpc_cidr" {
@@ -51,6 +46,18 @@ variable "private_subnets" {
 variable "public_subnets" {
   description = "Public subnet CIDR blocks"
   type        = list(string)
+}
+
+variable "single_nat_gateway" {
+  description = "Use single NAT Gateway for cost optimization"
+  type        = bool
+  default     = true
+}
+
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(string)
+  default     = {}
 }
 
 variable "eks_config" {

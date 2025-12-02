@@ -10,7 +10,7 @@ module "vpc" {
   public_subnets  = var.public_subnets
 
   enable_nat_gateway   = true
-  single_nat_gateway   = true
+  single_nat_gateway   = var.single_nat_gateway
   enable_dns_hostnames = true
   enable_dns_support   = true
 
@@ -27,8 +27,11 @@ module "vpc" {
     "karpenter.sh/discovery"                    = var.cluster_name
   }
 
-  tags = {
-    Environment = var.env
-    Terraform   = "true"
-  }
+  tags = merge(
+    {
+      Environment = var.env
+      Terraform   = "true"
+    },
+    var.tags
+  )
 }

@@ -10,6 +10,15 @@ vpc_cidr    = "10.200.0.0/16"
 private_subnets = ["10.200.0.0/19", "10.200.32.0/19"]
 public_subnets  = ["10.200.64.0/19", "10.200.96.0/19"]
 
+single_nat_gateway = true
+
+common_tags = {
+  Project     = "demo"
+  Owner       = "devops-team"
+  CostCenter  = "engineering"
+  ManagedBy   = "terraform"
+}
+
 eks_config = {
   default = {
     nodepool = {

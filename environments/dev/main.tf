@@ -1,14 +1,17 @@
 module "vpc" {
   source = "../../modules/vpc"
 
-  env          = var.env
-  name         = var.name
-  vpc_cidr     = var.vpc_cidr
-  azs          = [var.zone1, var.zone2]
-  cluster_name = "${var.env}-${var.name}"
+  env                = var.env
+  name               = var.name
+  vpc_cidr           = var.vpc_cidr
+  azs                = [var.zone1, var.zone2]
+  cluster_name       = "${var.env}-${var.name}"
+  single_nat_gateway = var.single_nat_gateway
 
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
+
+  tags = var.common_tags
 }
 
 module "eks" {
@@ -19,6 +22,8 @@ module "eks" {
   eks_version = var.eks_version
   vpc_id      = module.vpc.vpc_id
   subnet_ids  = module.vpc.private_subnets
+
+  tags = var.common_tags
 }
 
 module "kubernetes_addons" {

@@ -32,3 +32,15 @@ variable "cluster_name" {
   description = "EKS Cluster name for tagging"
   type        = string
 }
+
+variable "single_nat_gateway" {
+  description = "Use single NAT Gateway"
+  type        = bool
+  default     = true
+}
+
+variable "tags" {
+  description = "Additional tags for all resources"
+  type        = map(string)
+  default     = {}
+}
