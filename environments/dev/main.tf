@@ -23,6 +23,10 @@ module "eks" {
   vpc_id      = module.vpc.vpc_id
   subnet_ids  = module.vpc.private_subnets
 
+  node_group_min_size     = var.node_group_min_size
+  node_group_max_size     = var.node_group_max_size
+  node_group_desired_size = var.node_group_desired_size
+
   tags = var.common_tags
 }
 

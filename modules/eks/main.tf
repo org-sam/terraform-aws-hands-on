@@ -46,9 +46,9 @@ module "eks" {
     eks-node-initial = {
       instance_types = var.instance_types
 
-      min_size     = 1
-      max_size     = 3
-      desired_size = 2
+      min_size     = var.node_group_min_size
+      max_size     = var.node_group_max_size
+      desired_size = var.node_group_desired_size
 
       capacity_type = var.capacity_type
       disk_size     = var.disk_size

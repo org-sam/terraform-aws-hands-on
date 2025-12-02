@@ -41,6 +41,24 @@ variable "disk_size" {
   default     = 30
 }
 
+variable "node_group_min_size" {
+  description = "Minimum number of nodes in the initial node group"
+  type        = number
+  default     = 1
+}
+
+variable "node_group_max_size" {
+  description = "Maximum number of nodes in the initial node group"
+  type        = number
+  default     = 3
+}
+
+variable "node_group_desired_size" {
+  description = "Desired number of nodes in the initial node group"
+  type        = number
+  default     = 2
+}
+
 variable "tags" {
   description = "Additional tags for all resources"
   type        = map(string)

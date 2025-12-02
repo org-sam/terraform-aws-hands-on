@@ -19,6 +19,10 @@ common_tags = {
   ManagedBy   = "terraform"
 }
 
+node_group_min_size     = 1
+node_group_max_size     = 3
+node_group_desired_size = 2
+
 eks_config = {
   default = {
     nodepool = {

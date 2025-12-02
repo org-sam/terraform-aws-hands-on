@@ -64,3 +64,21 @@ variable "eks_config" {
   description = "EKS Configuration including NodePools"
   type        = any
 }
+
+variable "node_group_min_size" {
+  description = "Minimum number of nodes in the initial node group"
+  type        = number
+  default     = 1
+}
+
+variable "node_group_max_size" {
+  description = "Maximum number of nodes in the initial node group"
+  type        = number
+  default     = 3
+}
+
+variable "node_group_desired_size" {
+  description = "Desired number of nodes in the initial node group"
+  type        = number
+  default     = 2
+}
