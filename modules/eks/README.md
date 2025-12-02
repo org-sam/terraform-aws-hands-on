@@ -23,6 +23,7 @@ Módulo wrapper para criação de cluster EKS usando o módulo oficial `terrafor
 | instance_types | Tipos de instância para node group inicial | list(string) | ["t3.medium", "t3a.medium"] | Não |
 | capacity_type | Tipo de capacidade (SPOT/ON_DEMAND) | string | "SPOT" | Não |
 | disk_size | Tamanho do disco em GB | number | 30 | Não |
+| addon_versions | Versões dos addons do EKS | object | Ver valores padrão abaixo | Não |
 
 ## Outputs
 
@@ -69,3 +70,39 @@ O módulo cria um node group inicial com:
 - **pod-identity-agent**: Autenticação de pods
 - **metrics-server**: Métricas de recursos
 - **ebs-csi-driver**: Volumes EBS persistentes
+
+### Versões Padrão dos Addons
+
+```hcl
+addon_versions = {
+  kube_proxy             = "v1.34.1-eksbuild.2"
+  vpc_cni                = "v1.20.5-eksbuild.1"
+  coredns                = "v1.12.4-eksbuild.1"
+  eks_pod_identity_agent = "v1.3.10-eksbuild.1"
+  metrics_server         = "v0.8.0-eksbuild.5"
+  aws_ebs_csi_driver     = "v1.53.0-eksbuild.1"
+}
+```
+
+### Customizando Versões por Ambiente
+
+```hcl
+module "eks" {
+  source = "../../modules/eks"
+
+  env         = "production"
+  name        = "demo"
+  eks_version = "1.34"
+  vpc_id      = module.vpc.vpc_id
+  subnet_ids  = module.vpc.private_subnets
+
+  addon_versions = {
+    kube_proxy             = "v1.35.0-eksbuild.1"
+    vpc_cni                = "v1.21.0-eksbuild.1"
+    coredns                = "v1.13.0-eksbuild.1"
+    eks_pod_identity_agent = "v1.4.0-eksbuild.1"
+    metrics_server         = "v0.9.0-eksbuild.1"
+    aws_ebs_csi_driver     = "v1.54.0-eksbuild.1"
+  }
+}
+```

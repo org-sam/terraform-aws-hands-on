@@ -46,3 +46,23 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "addon_versions" {
+  description = "Versions for EKS addons"
+  type = object({
+    kube_proxy             = string
+    vpc_cni                = string
+    coredns                = string
+    eks_pod_identity_agent = string
+    metrics_server         = string
+    aws_ebs_csi_driver     = string
+  })
+  default = {
+    kube_proxy             = "v1.34.1-eksbuild.2"
+    vpc_cni                = "v1.20.5-eksbuild.1"
+    coredns                = "v1.12.4-eksbuild.1"
+    eks_pod_identity_agent = "v1.3.10-eksbuild.1"
+    metrics_server         = "v0.8.0-eksbuild.5"
+    aws_ebs_csi_driver     = "v1.53.0-eksbuild.1"
+  }
+}

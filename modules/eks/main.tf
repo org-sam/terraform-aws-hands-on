@@ -16,34 +16,34 @@ module "eks" {
     kube-proxy = {
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
-      addon_version               = "v1.34.1-eksbuild.2"
+      addon_version               = var.addon_versions.kube_proxy
     }
     vpc-cni = {
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
-      addon_version               = "v1.20.5-eksbuild.1"
+      addon_version               = var.addon_versions.vpc_cni
       before_compute              = true
     }
     coredns = {
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
-      addon_version               = "v1.12.4-eksbuild.1"
+      addon_version               = var.addon_versions.coredns
     }
     eks-pod-identity-agent = {
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
-      addon_version               = "v1.3.10-eksbuild.1"
+      addon_version               = var.addon_versions.eks_pod_identity_agent
       before_compute              = true
     }
     metrics-server = {
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
-      addon_version               = "v0.8.0-eksbuild.5"
+      addon_version               = var.addon_versions.metrics_server
     }
     aws-ebs-csi-driver = {
       resolve_conflicts_on_create = "OVERWRITE"
       resolve_conflicts_on_update = "OVERWRITE"
-      addon_version               = "v1.53.0-eksbuild.1"
+      addon_version               = var.addon_versions.aws_ebs_csi_driver
       service_account_role_arn    = aws_iam_role.ebs_csi_driver.arn
     }
   }
