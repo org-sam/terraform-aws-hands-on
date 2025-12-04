@@ -72,3 +72,14 @@ module "external_secrets" {
 
   tags = var.common_tags
 }
+
+module "argocd" {
+  source = "../../modules/argocd"
+
+  depends_on = [module.eks, module.kubernetes_addons]
+
+  env  = var.env
+  name = var.name
+
+  tags = var.common_tags
+}
