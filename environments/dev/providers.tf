@@ -5,13 +5,13 @@ provider "aws" {
 terraform {
   required_version = ">= 1.14"
 
-#   backend "s3" {
-#     bucket         = "projeto-base-terraform-state"
-#     key            = "dev/terraform.tfstate"
-#     region         = "us-east-1"
-#     dynamodb_table = "projeto-base-terraform-state-lock"
-#     encrypt        = true
-#   }
+  #   backend "s3" {
+  #     bucket         = "projeto-base-terraform-state"
+  #     key            = "dev/terraform.tfstate"
+  #     region         = "us-east-1"
+  #     dynamodb_table = "projeto-base-terraform-state-lock"
+  #     encrypt        = true
+  #   }
 
   required_providers {
     aws = {

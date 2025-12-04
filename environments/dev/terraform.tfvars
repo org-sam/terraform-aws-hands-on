@@ -13,10 +13,10 @@ public_subnets  = ["10.200.64.0/19", "10.200.96.0/19"]
 single_nat_gateway = true
 
 common_tags = {
-  Project     = "demo"
-  Owner       = "devops-team"
-  CostCenter  = "engineering"
-  ManagedBy   = "terraform"
+  Project    = "demo"
+  Owner      = "devops-team"
+  CostCenter = "engineering"
+  ManagedBy  = "terraform"
 }
 
 node_group_min_size     = 1
