@@ -8,6 +8,7 @@
 │   ├── efs/                  # Amazon EFS File Systems
 │   ├── kubernetes-addons/    # IAM Roles para Karpenter e LBC
 │   ├── external-secrets/     # IAM Roles para External Secrets
+│   ├── github-oidc/          # OIDC Provider para GitHub Actions
 │   └── argocd/               # Instalação do ArgoCD
 ├── environments/             # Configurações por Ambiente
 │   ├── dev/
@@ -83,6 +84,10 @@ aws eks update-kubeconfig --region <region> --name <cluster-name>
 - Criação de Namespace e ServiceAccount.
 
 **Nota:** O Helm chart do External Secrets Operator é gerenciado pelo ArgoCD.
+
+### Módulo GitHub OIDC (`modules/github-oidc`)
+- Criação de OIDC Provider para autenticação do GitHub Actions.
+- Criação de IAM Role com trust policy para repositórios GitHub específicos.
 
 ### Módulo ArgoCD (`modules/argocd`)
 - Instalação do ArgoCD via Helm.
