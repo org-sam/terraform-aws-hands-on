@@ -82,3 +82,14 @@ variable "node_group_desired_size" {
   type        = number
   default     = 2
 }
+
+variable "github_repositories" {
+  description = "GitHub repositories configuration for OIDC"
+  type = map(object({
+    subjects             = list(string)
+    managed_policy_arns  = list(string)
+    inline_policy_json   = optional(string)
+    max_session_duration = optional(number, 3600)
+  }))
+  default = {}
+}

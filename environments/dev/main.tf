@@ -83,3 +83,15 @@ module "argocd" {
 
   tags = var.common_tags
 }
+
+module "github_oidc" {
+  count  = length(var.github_repositories) > 0 ? 1 : 0
+  source = "../../modules/github-oidc"
+
+  env  = var.env
+  name = var.name
+
+  github_repositories = var.github_repositories
+
+  tags = var.common_tags
+}
