@@ -41,24 +41,13 @@ resource "aws_iam_role_policy_attachment" "eso_attach" {
   policy_arn = aws_iam_policy.eso.arn
 }
 
-resource "kubernetes_namespace" "external_secrets" {
-  metadata {
-    name = "external-secrets"
-  }
-}
-
-resource "kubernetes_service_account" "external_secrets" {
-  metadata {
-    name      = "external-secrets"
-    namespace = kubernetes_namespace.external_secrets.metadata[0].name
-  }
-}
-
-
 resource "aws_eks_pod_identity_association" "eso" {
   cluster_name    = var.cluster_name
-  namespace       = kubernetes_namespace.external_secrets.metadata[0].name
-  service_account = kubernetes_service_account.external_secrets.metadata[0].name
+  namespace       = "external-secrets"
+  service_account = "external-secrets"
   role_arn        = aws_iam_role.eso.arn
-}
 
+  depends_on = [
+    aws_iam_role_policy_attachment.eso_attach
+  ]
+}
