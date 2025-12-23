@@ -59,6 +59,24 @@ Após a criação do cluster, configure o acesso local:
 aws eks update-kubeconfig --region <region> --name <cluster-name>
 ```
 
+### 5. Acesse o ArgoCD
+
+Obtenha a senha inicial do admin:
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+Faça port-forward para acessar a UI do ArgoCD:
+
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+Acesse: https://localhost:8080
+- Usuário: `admin`
+- Senha: (obtida no comando acima)
+
 ## Componentes dos Módulos
 
 ### Módulo VPC (`modules/vpc`)
