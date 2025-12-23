@@ -29,8 +29,6 @@ Módulo wrapper para criação de VPC usando o módulo oficial `terraform-aws-mo
 |------|-----------|
 | vpc_id | ID da VPC criada |
 | private_subnets | IDs das subnets privadas |
-| public_subnets | IDs das subnets públicas |
-| nat_gateway_ids | IDs dos NAT Gateways |
 
 ## Exemplo de Uso
 
