@@ -28,9 +28,6 @@ Módulo wrapper para criação de Amazon Elastic File System (EFS) usando o mód
 | Nome | Descrição |
 |------|-----------|
 | efs_id | ID do EFS file system |
-| efs_arn | ARN do EFS file system |
-| efs_dns_name | DNS name do EFS file system |
-| security_group_id | ID do security group do EFS |
 
 ## Exemplo de Uso
 
