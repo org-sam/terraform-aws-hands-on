@@ -20,10 +20,14 @@ Módulo wrapper para criação de cluster EKS usando o módulo oficial `terrafor
 | eks_version | Versão do Kubernetes | string | - | Sim |
 | vpc_id | ID da VPC | string | - | Sim |
 | subnet_ids | IDs das subnets | list(string) | - | Sim |
-| instance_types | Tipos de instância para node group inicial | list(string) | ["t3.medium", "t3a.medium"] | Não |
+| instance_types | Tipos de instância para node group inicial | list(string) | ["c6i.xlarge", "c6a.xlarge"] | Não |
 | capacity_type | Tipo de capacidade (SPOT/ON_DEMAND) | string | "SPOT" | Não |
 | disk_size | Tamanho do disco em GB | number | 30 | Não |
+| node_group_min_size | Número mínimo de nodes | number | 1 | Não |
+| node_group_max_size | Número máximo de nodes | number | 3 | Não |
+| node_group_desired_size | Número desejado de nodes | number | 2 | Não |
 | addon_versions | Versões dos addons do EKS | object | Ver valores padrão abaixo | Não |
+| tags | Tags adicionais | map(string) | {} | Não |
 
 ## Outputs
 
@@ -32,7 +36,7 @@ Módulo wrapper para criação de cluster EKS usando o módulo oficial `terrafor
 | cluster_name | Nome do cluster EKS |
 | cluster_endpoint | Endpoint do cluster |
 | cluster_certificate_authority_data | CA certificate do cluster |
-| cluster_security_group_id | ID do security group do cluster |
+| node_security_group_id | ID do security group dos nodes |
 | eks_managed_node_groups | Informações dos node groups |
 
 ## Exemplo de Uso
@@ -47,18 +51,22 @@ module "eks" {
   vpc_id      = module.vpc.vpc_id
   subnet_ids  = module.vpc.private_subnets
 
-  instance_types = ["t3.medium", "t3a.medium"]
+  instance_types = ["c6i.xlarge", "c6a.xlarge"]
   capacity_type  = "SPOT"
   disk_size      = 30
+  
+  node_group_min_size     = 1
+  node_group_max_size     = 3
+  node_group_desired_size = 2
 }
 ```
 
 ## Node Group Inicial
 
 O módulo cria um node group inicial com:
-- Min: 1 node
-- Max: 3 nodes
-- Desired: 1 node
+- Min: 1 node (configurável)
+- Max: 3 nodes (configurável)
+- Desired: 2 nodes (configurável)
 - Label: `nodeTypeClass = initial`
 - Usado para rodar Karpenter e outros componentes críticos
 
