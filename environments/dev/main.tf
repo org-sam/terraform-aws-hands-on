@@ -21,6 +21,7 @@ module "eks" {
   name        = var.name
   eks_version = var.eks_version
   vpc_id      = module.vpc.vpc_id
+  vpc_cidr    = var.vpc_cidr
   subnet_ids  = module.vpc.private_subnets
 
   node_group_min_size     = var.node_group_min_size

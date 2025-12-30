@@ -87,3 +87,8 @@ variable "addon_versions" {
     aws_efs_csi_driver     = "v2.1.15-eksbuild.1"
   }
 }
+
+variable "vpc_cidr" {
+  description = "VPC CIDR block"
+  type        = string
+}

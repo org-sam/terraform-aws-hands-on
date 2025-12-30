@@ -71,10 +71,24 @@ module "eks" {
     },
     var.tags
   )
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${var.env}-${var.name}" = null
+  }
   security_group_tags = merge(
     {
       "karpenter.sh/discovery" = "${var.env}-${var.name}"
     },
     var.tags
   )
+}
+
+# Istio webhook port
+resource "aws_security_group_rule" "istio_webhook" {
+  type              = "ingress"
+  from_port         = 15017
+  to_port           = 15017
+  protocol          = "tcp"
+  cidr_blocks       = [var.vpc_cidr]
+  security_group_id = module.eks.node_security_group_id
+  description       = "Allow Istio webhook traffic from VPC"
 }
