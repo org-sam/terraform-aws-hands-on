@@ -65,3 +65,7 @@ github_repositories = {
     ]
   }
 }
+
+hosted_zone_arns = [
+  "arn:aws:route53:::hostedzone/Z0728988PJ08PEQVVTVX"
+]

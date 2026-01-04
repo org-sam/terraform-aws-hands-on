@@ -93,3 +93,9 @@ variable "github_repositories" {
   }))
   default = {}
 }
+
+variable "hosted_zone_arns" {
+  description = "List of Route53 Hosted Zone ARNs for External DNS"
+  type        = list(string)
+  default     = []
+}

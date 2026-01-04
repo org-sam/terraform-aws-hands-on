@@ -78,6 +78,18 @@ module "argocd" {
   depends_on = [module.eks, module.kubernetes_addons, module.external_secrets]
 }
 
+module "external_dns" {
+  count  = length(var.hosted_zone_arns) > 0 ? 1 : 0
+  source = "../../modules/external-dns"
+
+  cluster_name     = module.eks.cluster_name
+  hosted_zone_arns = var.hosted_zone_arns
+
+  tags = var.common_tags
+
+  depends_on = [module.eks, module.kubernetes_addons]
+}
+
 module "github_oidc" {
   count  = length(var.github_repositories) > 0 ? 1 : 0
   source = "../../modules/github-oidc"

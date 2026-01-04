@@ -26,3 +26,8 @@ output "eks_managed_node_groups_iam_role_name" {
 output "github_role_arns" {
   value       = length(module.github_oidc) > 0 ? module.github_oidc[0].role_arns : {}
 }
+
+output "external_dns_iam_role_arn" {
+  description = "IAM Role ARN for External DNS"
+  value       = length(module.external_dns) > 0 ? module.external_dns[0].iam_role_arn : null
+}
